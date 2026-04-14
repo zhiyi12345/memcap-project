@@ -10,6 +10,7 @@ meme-metaphor-project/
 ├── step1_paligemma/
 │   ├── ketchup/            # Fine-tune PaliGemma2 on KETCHUP for metaphor detection
 │   └── meme/               # Fine-tune PaliGemma2 on MemeCap + run inference
+├── step1.5_qwen/           # Fine-tune Qwen2.5 on KETCHUP for metaphor detection using Kaggle
 ├── step2_llama_finetune/   # Fine-tune Llama 3.2 on enriched meme captions
 └── step3_eval/             # Evaluate with BERTScore + LLM-as-Judge
 ```
@@ -129,10 +130,22 @@ sbatch infer_ketchup.sh
 This step runs on Kaggle and fine-tunes `Qwen/Qwen2.5-VL-7B-Instruct` on the KETCHUP/MultiMM advertisement dataset for metaphor detection and extraction. It then uses the fine-tuned model to enrich MemeCap with `Vehicle` / `Target` metaphor annotations.
 
 ### Inputs
-- `multimm_path`: `/kaggle/input/datasets/{username}/multimm/EN.xlsx`
-- `multimm_images_path`: `/kaggle/input/datasets/{username}/multimm-images/imgs_EN/`
-- `memecap_path`: `/kaggle/input/datasets/{username}/memecap-images/trainval_image/`
-- `trainval_file`: original `dataset/memes-trainval.json`
+
+- `multimm_path`: `/kaggle/input/datasets/{username}/multimm/EN.xlsx`  
+  - MultiMM dataset Excel file for KETCHUP training.
+  - Get from the `1.5_qwen` folder or the MultiMM repo.
+
+- `multimm_images_path`: `/kaggle/input/datasets/{username}/multimm-images/imgs_EN/`  
+  - Ketchup advertisement images for the MultiMM dataset.
+  - Download from the MultiMM repo and upload to Kaggle.
+
+- `memecap_path`: `/kaggle/input/datasets/{username}/memecap-images/trainval_image/`  
+  - MemeCap trainval images.
+  - Download using `dataset_prep/download_images.py`.
+
+- `trainval_file`: `memes-trainval.json`  
+  - Original MemeCap trainval JSON.
+  - Get from `dataset/memes-trainval.json`.
 
 ### Outputs
 - Fine-tuned LoRA model folder: `./qwen2.5-vl-metaphor-lora-save`
