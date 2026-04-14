@@ -24,6 +24,7 @@ meme-metaphor-project/
   - `google/paligemma2-3b-pt-224`
   - `meta-llama/Llama-3.2-3B-Instruct`
 - Python 3.12, virtualenv
+- Kaggle (With Nvidia T4 GPU)
 
 ---
 
@@ -89,7 +90,7 @@ Images will be saved to `dataset/trainval_image/` and `dataset/test_image/`.
 
 ## Step 1 — PaliGemma2 Fine-tuning
 
-### 1a. Ketchup — Metaphor Detection (to be completed by teammate)
+### 1a. Ketchup — Metaphor Detection
 
 Fine-tunes PaliGemma2 on the KETCHUP/MultiMM advertisement dataset for multi-task metaphor detection (relationship, sentiment, target, source).
 
